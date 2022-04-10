@@ -1,20 +1,21 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const WebSocket = require('ws');
-const PORT = 9999;
+const WebSocket = require('express-ws')(app);
+const PORT = process.env.PORT || 9999;
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   })
+// );
 
-const server = app.listen(PORT, () => {
+app.use(express.json())
+   .listen(PORT, () => {
   console.log(PORT, 'waiting unitil connects');
 });
-
+app.use(cors())
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
