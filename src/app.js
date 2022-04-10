@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const WebSocket = require('wss');
+const WebSocket = require('ws');
 const PORT = process.env.PORT || 9999;
 
 app.use(
