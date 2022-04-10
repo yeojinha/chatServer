@@ -4,13 +4,6 @@ const app = express();
 const WebSocket = require('express-ws')(app);
 const PORT = process.env.PORT || 9999;
 
-// app.use(
-//   cors({
-//     origin: true,
-//     credentials: true,
-//   })
-// );
-
 app.use(express.json())
    .listen(PORT, () => {
   console.log(PORT, 'waiting unitil connects');
@@ -20,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-const wss = new WebSocket.Server({ server, path: '/ws' });
+const wss = new WebSocket.Server({ server, path: '/wss' });
 
 wss.on('connection', (ws, req) => {
   // connection
