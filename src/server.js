@@ -1,27 +1,17 @@
-const cors = require('cors');
 const express = require('express');
-const app = express();
-const WebSocket = require('ws');
+const { Server } = require('ws');
+
 const PORT = process.env.PORT || 9999;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new Server({ server });
 
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
-
-app.listen(PORT, () => {
-  console.log(PORT, '번 포트에서 대기중');
-});
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-
-const wss = new WebSocket.Server({ port:9999 });
+const wss = new WebSocket.Server({ server, path: '/wss' });
 
 wss.on('connection', (ws, req) => {
   // connection
