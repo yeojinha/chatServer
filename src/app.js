@@ -2,8 +2,8 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const WebSocket = require('ws');
-const PORT = process.env.PORT || 9999;
-
+const listenPort = process.env.PORT || 9999;
+const SERVER_PORT = 9999;
 
 app.use(
   cors({
@@ -12,8 +12,8 @@ app.use(
   })
 );
 
-app.listen(PORT, () => {
-  console.log(PORT, '번 포트에서 대기중');
+app.listen(listenPort, () => {
+  console.log(listenPort, '번 포트에서 대기중');
 });
 
 app.get('/', (req, res) => {
