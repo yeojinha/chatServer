@@ -2,7 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const WebSocket = require('ws');
-const PORT = 3000;
+const port = process.env.PORT || 3000
 
 app.use(
   cors({
@@ -11,8 +11,8 @@ app.use(
   })
 );
 
-const server = app.listen(PORT, () => {
-  console.log(PORT, 'waiting unitil connects');
+const server = app.listen(port, () => {
+  console.log(port, 'waiting unitil connects');
 });
 
 app.get('/', (req, res) => {
