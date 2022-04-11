@@ -2,8 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const WebSocket = require('ws');
-const listenPort = process.env.PORT || 3000;
-const SERVER_PORT = 9999;
+const PORT = 3000;
 
 app.use(
   cors({
@@ -12,16 +11,15 @@ app.use(
   })
 );
 
-app.listen(listenPort, () => {
-  console.log(listenPort, '번 포트에서 대기중');
+const server = app.listen(PORT, () => {
+  console.log(PORT, 'waiting unitil connects');
 });
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-
-const wss = new WebSocket.Server({ port:9999 });
+const wss = new WebSocket.Server({ server, path: '/ws' });
 
 wss.on('connection', (ws, req) => {
   // connection
