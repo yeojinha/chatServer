@@ -2,7 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const WebSocket = require('ws');
-const listenPort = process.env.PORT || 9999;
+const listenPort = process.env.PORT || 3000;
 const SERVER_PORT = 9999;
 
 app.use(
