@@ -1,32 +1,9 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const WebSocket = require('ws');
+const WebSocket = require('wss');
 const PORT = process.env.PORT || 3000
 const expressWs = require('express-ws')(app)
-/*
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3002
-const cors = require('cors')
-
-app.use(express.json())
-app.listen(port, () => {
-  console.log(`Server started!`)
-})
-
-app.use(cors());
-
-app.get('/', (req, res) => { res.send('Hello World') })
-
-const { Server } = require('ws');
-const wss = new Server({ server: app })
-wss.on('connection', function connection(ws) {
- console.log("New connection")
-...
-})
-*/
-
 app
   .use(epxress.json())
   .listen(PORT, ()=>console.log(`Listening on ${PORT}`))
