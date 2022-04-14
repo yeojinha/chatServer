@@ -1,11 +1,12 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const WebSocket = require('wss');
+const WebSocket = require('ws');
 const PORT = process.env.PORT || 3000
 const expressWs = require('express-ws')(app)
+
 app
-  .use(epxress.json())
+  .use(express.json())
   .listen(PORT, ()=>console.log(`Listening on ${PORT}`))
 
 app.use(cors())
@@ -24,6 +25,7 @@ app.ws('/', (ws, req) => {
     json.time = Date.now()
     message = JSON.stringify(json)
     console.log(message.toString());
+
     expressWs.getWss().clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(message.toString());
@@ -32,12 +34,14 @@ app.ws('/', (ws, req) => {
 
       // Runs when client disconnects
   ws.on('disconnect', () => {
+    });
   });
-  });
+  
   ws.on('error', (err) => {
     // error 
     console.error(err);
   });
+
   ws.on('close', () => {
     // close
     console.log('Client close');
